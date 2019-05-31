@@ -1,3 +1,50 @@
+import {
+  FETCHING,
+  FETCHING_SUCCESS,
+  FETCHING_FAILURE,
+  ADDING,
+  ADDED,
+  ERROR} from '../actions'
+
+const initialState = {
+  smurfs: [],
+  fetchingSmurfs: false,
+  addingSmurf: false,
+  updatingSmurf: false,
+  deletingSmurf: false,
+  error: null
+}
+
+const smurfReducer = (state = initialState, action) => {
+  switch(action.type) {
+    case FETCHING:
+      return{...state, fetchingSmurfs: true};
+
+      case FETCHING_SUCCESS:
+        return{...state,
+        fetchingSmurfs: false,
+      smurfs: [...state.smurfs, ...action.payload]
+    };
+
+    case FETCHING_FAILURE:
+      return{
+        ...state, fetchingSmurfs: false, error: action.payload
+      };
+
+    case ADDED:
+      return {
+        ...state, smurfs: [...action.payload] }
+
+        default:
+          return state;
+
+      }
+  }
+
+  export default smurfReducer;
+
+
+
 /*
   Be sure to import in all of the action types from `../actions`
 */
